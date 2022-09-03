@@ -1,0 +1,24 @@
+#define error PanicError(uint256)
+#define error Error(string)
+
+#define macro PANIC() = takes(1) returns (0) {
+    _ERROR(PanicError)
+    0x00 mstore
+    0x04 mstore
+    0x24 0x00 revert
+}
+
+#define macro REQUIRE() = takes(3) returns(0) {
+    continue jumpi
+
+    _ERROR(Error)
+    0x00 mstore
+    0x20 0x04 mstore
+    0x24 mstore
+    0x44 mstore
+
+    0x64 0x00 revert
+
+    continue:
+        pop
+}
