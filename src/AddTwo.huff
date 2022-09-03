@@ -1,0 +1,18 @@
+#define function addTwo(uint256, uint256) view returns(uint256)
+
+#define macro MAIN() = takes (0) returns (0) {
+
+    // get first 2 args (uint256) from calldata
+    0x00 calldataload 
+    0x20 calldataload
+    add
+
+    // store result inside memory at slot 0
+    0x00
+    mstore
+
+    // return result from add function whose result is stored at slot 0 in memory and takes 32 bytes (0x20)
+    0x20
+    0x00
+    return
+}
